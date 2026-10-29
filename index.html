@@ -56,4 +56,37 @@ function renderSiteNotice(){const n=state.ownerSettings&&state.ownerSettings.sit
 function renderOwner(){if(!state.owner)return;$('registrationEnabled').checked=state.ownerSettings.registrationEnabled!==false;$('welcomeEnabled').checked=state.ownerSettings.welcomeEnabled!==false;$('ownerWelcomeMessage').value=state.ownerSettings.welcomeMessage||'';$('ownerSiteNotice').value=state.ownerSettings.siteNotice||'';$('ownerStudents').innerHTML=state.users.length?state.users.map(u=>`<div class="record"><div class="recordtop"><div><b>${esc(u.name)}</b><small style="display:block">ID: ${esc(u.id)}</small></div><button class="btn danger" onclick="ownerDeleteStudent('${esc(u.id)}')">Delete</button></div></div>`).join(''):'<div class="empty">No student accounts on this browser yet.</div>';$('broadcastHistory').innerHTML=state.broadcasts.length?state.broadcasts.slice().reverse().map(b=>`<div class="record"><b>${esc(b.title)}</b><p>${esc(b.message)}</p><small>${new Date(b.created).toLocaleString()}</small></div>`).join(''):'<div class="empty">No local announcements yet.</div>'}$('saveOwnerSettings').onclick=()=>{if(!state.owner)return;state.ownerSettings={registrationEnabled:$('registrationEnabled').checked,welcomeEnabled:$('welcomeEnabled').checked,welcomeMessage:$('ownerWelcomeMessage').value.trim()||'Welcome to your NEET preparation journey!',siteNotice:$('ownerSiteNotice').value.trim()};save();renderSiteNotice();renderOwner();toast('Owner settings saved for this browser')};$('clearSiteNotice').onclick=()=>{if(!state.owner)return;$('ownerSiteNotice').value='';state.ownerSettings.siteNotice='';save();renderSiteNotice();toast('Dashboard notice cleared')};window.ownerDeleteStudent=uid=>{if(!state.owner)return;if(!confirm('Delete this local student account and its associated records?'))return;state.users=state.users.filter(u=>u.id!==uid);if(state.user===uid)state.user=null;state.welcomed&&delete state.welcomed[uid];state.seenBroadcasts&&delete state.seenBroadcasts[uid];save();renderOwner();toast('Local student account deleted')};$('sendBroadcast').onclick=()=>{if(!state.owner)return;let title=$('broadcastTitle').value.trim(),message=$('broadcastMessage').value.trim();if(!message){toast('Write a broadcast message first.');return}state.broadcasts.push({id:id(),title:title||'Announcement',message,created:new Date().toISOString()});$('broadcastTitle').value='';$('broadcastMessage').value='';save();renderOwner();toast('Announcement saved for accounts on this browser')};$('ownerExport').onclick=()=>$('exportData').click();$('ownerReset').onclick=()=>{if(!state.owner)return;if(confirm('This clears all local accounts, study logs, targets, chapters and broadcasts from this browser. Continue?')){localStorage.removeItem(key);state={users:[],user:null,owner:false,profile:{name:'',aim:'NEET UG 2027',startDate:today(),goal:240},targets:[],records:[],sessions:[],settings:{date:today(),goal:240},welcomed:{},chapterChecks:{},broadcasts:[],seenBroadcasts:{},ownerSettings:{registrationEnabled:true,welcomeEnabled:true,welcomeMessage:'Your journey to NEET UG 2027 starts here. Set your preparation start date, mark your syllabus, and take one focused step every day.',siteNotice:''}};showAuth();toast('Local app data reset')}};
 
 load();if(localStorage.getItem('ayushTheme')==='dark')document.body.classList.add('dark');if(state.user&&state.users.some(x=>x.id===state.user)){state.owner=false;showApp()}else{state.user=null;state.owner=false;showAuth()}
-</script></body></html>
+<!-- Custom Student ID Modal -->
+<div id="idModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); z-index:9999; align-items:center; justify-content:center;">
+  <div style="background:#fff; width:90%; max-width:360px; padding:24px; border-radius:16px; text-align:center; box-shadow:0 10px 25px rgba(0,0,0,0.2);">
+    <h3 style="margin:0 0 8px 0; color:#1e1e2f; font-size:20px;">🎉 Registration Successful!</h3>
+    <p style="margin:0 0 16px 0; color:#666; font-size:13px;">Save your Student ID for future login:</p>
+    
+    <div style="background:#f3f4f6; border:1px dashed #7562df; padding:12px; border-radius:10px; display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+      <span id="modalStudentId" style="font-weight:bold; font-size:18px; color:#7562df; letter-spacing:1px;"></span>
+      <button onclick="copyStudentId()" id="copyBtn" style="background:#7562df; color:#fff; border:none; padding:6px 12px; border-radius:6px; cursor:pointer; font-size:12px; font-weight:bold;">Copy</button>
+    </div>
+
+    <button onclick="closeIdModal()" style="width:100%; padding:10px; background:#1e1e2f; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Continue to Login</button>
+  </div>
+</div>
+
+<script>
+function showStudentIdModal(studentId) {
+  document.getElementById('modalStudentId').innerText = studentId;
+  document.getElementById('idModal').style.display = 'flex';
+}
+function closeIdModal() {
+  document.getElementById('idModal').style.display = 'none';
+}
+function copyStudentId() {
+  const idText = document.getElementById('modalStudentId').innerText;
+  navigator.clipboard.writeText(idText);
+  const btn = document.getElementById('copyBtn');
+  btn.innerText = 'Copied!';
+  btn.style.background = '#22c55e';
+  setTimeout(() => { btn.innerText = 'Copy'; btn.style.background = '#7562df'; }, 2000);
+}
+</script>
+
+</body></html>
