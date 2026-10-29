@@ -12,26 +12,9 @@
 body.dark{--bg:#121222;--panel:#1d1b31;--ink:#f1efff;--muted:#aaa5c3;--line:#34304d;--shadow:0 12px 32px #0002}body.dark .navtabs{background:#201e36}body.dark .tab.active,body.dark .record,body.dark .stat,body.dark .chip{background:#282540;color:var(--ink)}body.dark .field input,body.dark .field select,body.dark .field textarea,body.dark input.control,body.dark select.control,body.dark textarea.control{background:#24213c;color:var(--ink)}body.dark .timer{background:linear-gradient(135deg,#292344,#173a3a)}body.dark .btn.alt{background:#302b4e;color:#c9c0ff}body.dark .targetitem{border-color:var(--line)}
 .countgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.countunit{background:linear-gradient(145deg,#f0edff,#e5fbf6);border:1px solid #e4def8;border-radius:13px;padding:12px 6px;text-align:center}.countunit strong{display:block;font-size:clamp(20px,4vw,30px);font-variant-numeric:tabular-nums}.countunit small{font-size:10px;color:var(--muted)}.chapter-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.chapter-row{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--line);border-radius:11px;padding:10px;font-size:12px}.chapter-row input{margin-top:2px;accent-color:var(--purple)}.chapter-row.done{background:#e8faf4;border-color:#bcefe0}.chapter-row small{display:block;color:var(--muted);margin-top:3px}.announcement{border:1px solid #b9eee1;background:#effcf8;padding:13px;border-radius:12px;margin:8px 0}.owner-only{border:1px solid #d8cffb;background:#f5f2ff;border-radius:14px;padding:14px}.btnrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.btnrow button{min-height:38px}.dangertext{color:#bc355e}.countdown-banner{background:linear-gradient(125deg,#201a45,#3c326f 60%,#155b58);color:white;border-radius:18px;padding:20px;margin:0 0 16px}.countdown-banner p{color:#d4d0f1;font-size:12px}.countdown-banner .countunit{background:#ffffff13;border-color:#ffffff20;color:white}.countdown-banner .countunit small{color:#d4d0f1}.chapter-filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}@media(max-width:760px){.chapter-list{grid-template-columns:1fr}.countgrid{gap:5px}.countunit{padding:10px 3px}}
 @media(max-width:760px){.hero{align-items:stretch;flex-direction:column}.hero-right{display:flex;justify-content:space-around;align-items:center}.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.card{padding:16px}.navtabs{margin-left:-2px;margin-right:-2px}.bottomnav{display:flex;position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);padding:7px 3px calc(7px + env(safe-area-inset-bottom));justify-content:space-around;z-index:10}.bottomnav button{border:0;background:transparent;color:#77718f;font-size:10px;font-weight:800;display:grid;gap:3px;justify-items:center;padding:5px}.bottomnav button span{font-size:18px}body.dark .bottomnav{background:#1d1b31}.sectionhead{align-items:flex-start;flex-direction:column}.two{grid-template-columns:1fr 1fr}}
-/* Global Form Box Fix */
-input[type="text"],
-input[type="number"],
-input[type="date"],
-select,
-textarea {
-  width: 100% !important;
-  height: 48px !important;
-  box-sizing: border-box !important;
-  vertical-align: middle !important;
-}
-
-/* Container alignment for side-by-side inputs */
-form div, 
-.grid, 
-.flex {
-  align-items: flex-start;
-}
-
-  </style></head><body>
+ input[type="date"] { max-width: 180px !important; }
+input[type="number"] { max-width: 180px !important; }
+ </style></head><body>
 <header class="top"><nav class="nav"><div class="brand"><div class="logo">
   <img src="logo.png" alt="PrepVault Logo">
 </div><div><div><span style="color:#a99aff">PrepVault</span></div><div class="tag">AYUSH KUMAR · STUDY JOURNEY</div></div></div><div class="row"><span class="handle">✦ @Ayush9845</span><a class="btn alt" href="https://t.me/Ayush9845" target="_blank" rel="noopener" style="text-decoration:none">✉ Contact Creator</a><button class="btn alt" id="themeBtn">☾ Theme</button></div></nav><section class="hero"><div><div class="eyebrow">YOUR NEET UG 2027 JOURNEY</div><h1 id="greeting">Small steps. Strong future.</h1><p>Your personal study space to plan daily targets, track focus sessions, record what you studied, and review your progress.</p></div><div class="hero-right"><div><strong id="dayCount">DAY 1</strong><small>your journey</small></div><div><strong id="focusToday">0m</strong><small>focus today</small></div></div></section></header>
