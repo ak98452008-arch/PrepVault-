@@ -70,8 +70,6 @@ load();if(localStorage.getItem('ayushTheme')==='dark')document.body.classList.ad
     <button onclick="closeIdModal()" style="width:100%; padding:10px; background:#1e1e2f; color:#fff; border:none; border-radius:8px; font-weight:bold; cursor:pointer;">Continue to Login</button>
   </div>
 </div>
-
-<script>
 function showStudentIdModal(studentId) {
   document.getElementById('modalStudentId').innerText = studentId;
   document.getElementById('idModal').style.display = 'flex';
@@ -87,12 +85,16 @@ function copyStudentId() {
   btn.style.background = '#22c55e';
   setTimeout(() => { btn.innerText = 'Copy'; btn.style.background = '#7562df'; }, 2000);
 }
-  document.addEventListener('click', function(e) {
-  if (e.target && e.target.id === 'saveRegister' || (e.target.innerText && e.target.innerText.includes('CREATE STUDENT ACCOUNT'))) {
+
+// Automatically trigger modal on registration
+document.addEventListener('click', function(e) {
+  if (e.target && (e.target.id === 'saveRegister' || (e.target.innerText && e.target.innerText.includes('CREATE STUDENT ACCOUNT')))) {
     setTimeout(() => {
-      const idEl = document.getElementById('studentIdDisplay') || document.querySelector('.student-id'); 
-      if (idEl) showStudentIdModal(idEl.innerText);
-    }, 300);
+      const idEl = document.getElementById('studentIdDisplay') || document.querySelector('.student-id') || document.querySelector('[id*="id"]');
+      if (idEl && idEl.innerText) {
+        showStudentIdModal(idEl.innerText);
+      }
+    }, 400);
   }
 });
 
