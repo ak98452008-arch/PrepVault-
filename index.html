@@ -88,15 +88,21 @@ function copyStudentId() {
 
 // Automatically trigger modal on registration
 document.addEventListener('click', function(e) {
-  if (e.target && (e.target.id === 'saveRegister' || (e.target.innerText && e.target.innerText.includes('CREATE STUDENT ACCOUNT')))) {
+  // Check if click is on create account button
+  if (e.target && (e.target.id === 'showRegister' || e.target.innerText.includes('CREATE STUDENT ACCOUNT') || e.target.id === 'saveRegister')) {
     setTimeout(() => {
-      const idEl = document.getElementById('studentIdDisplay') || document.querySelector('.student-id') || document.querySelector('[id*="id"]');
-      if (idEl && idEl.innerText) {
-        showStudentIdModal(idEl.innerText);
+      // Look for any element containing the generated ID on screen
+      const allElements = document.querySelectorAll('*');
+      for (let el of allElements) {
+        if (el.innerText && el.innerText.match(/^[A-Z0-9]{6,}$/)) {
+          showStudentIdModal(el.innerText);
+          break;
+        }
       }
-    }, 400);
+    }, 500);
   }
 });
+
 
 </script>
 
