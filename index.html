@@ -87,6 +87,15 @@ function copyStudentId() {
   btn.style.background = '#22c55e';
   setTimeout(() => { btn.innerText = 'Copy'; btn.style.background = '#7562df'; }, 2000);
 }
+  document.addEventListener('click', function(e) {
+  if (e.target && e.target.id === 'saveRegister' || (e.target.innerText && e.target.innerText.includes('CREATE STUDENT ACCOUNT'))) {
+    setTimeout(() => {
+      const idEl = document.getElementById('studentIdDisplay') || document.querySelector('.student-id'); 
+      if (idEl) showStudentIdModal(idEl.innerText);
+    }, 300);
+  }
+});
+
 </script>
 
 </body></html>
